@@ -1,8 +1,10 @@
 pipeline {
     agent any
-triggers {
-pollSCM('*****')
-}
+    
+    triggers {
+	pollSCM('* * * * *')
+	
+    }
     stages {
         
         stage("Compilation") {
