@@ -35,4 +35,11 @@ pipeline {
            }
         }
     }
+    post {
+ always {
+ mail to: 'imanerayhane9@gmail.com',
+ subject: "Cher lion Votre compilation est terminée: ${currentBuild.fullDisplayName}",
+ body: " Votre build est accompli, Veuilez vérifier: ${env.BUILD_URL}"
+ }
+ }
 }
