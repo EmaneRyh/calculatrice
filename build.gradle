@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
 	id 'io.spring.dependency-management' version '1.1.6'
+	id 'jacoco' //Application du plugin JaCoCo
+	id 'checkstyle'
 }
 
 group = 'com.imane'
@@ -9,7 +11,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
@@ -27,3 +29,16 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+// Configuration de la vérification de la couverture de tests JaCoCo
+jacocoTestCoverageVerification{
+violationRules {
+	rule {
+		limit {
+			minimum = 0.2 // Définit le seuil minimum de couverture à 20 %
+	}
+	}
+	}
+	}
+
+// Assure que la vérification de la couverture est exécutée après les tests
+check.dependsOn jacocoTestCoverageVerification
